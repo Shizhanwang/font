@@ -1,0 +1,106 @@
+html,body
+{margin:0;
+padding:0;
+height:100%;}
+
+body{
+    display:flex;     /* 移动布局里面的盒模型，移动布局中浮动已经不重要，相反自适应成为主要的需求 */
+	display:-webkit-flex;   
+  display:-ms-flex;
+   align-items:center;    /*项目在交叉轴上如何对齐   center:项目位于容器的中心*/
+  -webkit-align-items:center;    
+      flex-align:center;
+	   justify-content:center;    /*属性定义了项目在主轴上的对齐方式  center:位于容器的中心*/
+  -webkit-justify-content:center;
+    flex-pack:center;
+  background-color:#0099CC;
+}
+
+p
+{color:#fff;
+font-size:1em;
+font-weight:bold;
+font-family:"微软雅黑";}
+
+p span {
+  display:inline-block;   /*行内块元素*/
+  position:relative;
+  -webkit-transform-style:preserve-3d;    /*嵌套元素是怎样在三维空间中呈现。   preserve-3d:子元素将保留其 3D 位置*/
+          transform-style:preserve-3d;
+  -webkit-perspective:500;   /*关于透视的设置，决定了我们看到的是2次元的还是3次元的*/
+          perspective:500;
+  -webkit-font-smoothing:antialiased;
+}
+
+p span:before,
+p span:after {
+  display:none;
+  position:absolute;
+  top:0;
+  left:-1px;
+  -webkit-transform-origin:left top;   /*改变元素的位置*/
+      -ms-transform-origin:left top;
+          transform-origin:left top;
+  -webkit-transition:all ease-out 0.3s;    /*设置过渡的时间曲线，以慢速结束*/
+          transition:all ease-out 0.3s;
+  content:attr(data-text);
+}
+
+p span:before {
+  z-index:1;
+  color:rgba(0,0,0,0.2);
+  -webkit-transform:scale(1.1, 1) skew(0deg, 20deg);   /* skew，该元素会根据横向（X轴）和垂直（Y轴）线参数给定角度,绕X轴和Y轴*/
+      -ms-transform:scale(1.1, 1) skew(0deg, 20deg);
+          transform:scale(1.1, 1) skew(0deg, 20deg);
+}
+
+p span:after {
+  z-index:2;
+  color:#684da3;
+  text-shadow:-1px 0 1px #684da3, 1px 0 1px rgba(0,0,0,0.8);
+            transform:rotateY(-40deg);     /*围绕其在一个给定度数Y轴旋转的元素*/
+  -webkit-transform:rotateY(-40deg);
+}
+
+p span:hover:before {
+           transform:scale(1.1, 1) skew(0deg, 5deg);  
+  -webkit-transform:scale(1.1, 1) skew(0deg, 5deg);    
+      -ms-transform:scale(1.1, 1) skew(0deg, 5deg);
+}
+
+p span:hover:after {
+          transform:rotateY(-10deg);  
+  -webkit-transform:rotateY(-10deg);
+}
+
+p span + span {      /*相邻兄弟选择器,有相同的父元素*/
+  margin-left:0.1em;
+}
+
+@media (min-width:20em) {
+  p {
+    font-size:2em;
+  }
+  p span::before,
+  p span::after {
+    display:block;
+  }
+}
+
+@media (min-width:30em) {
+  p {
+    font-size:3em;
+  }
+}
+
+@media (min-width:40em) {
+  p {
+    font-size:5em;
+  }
+}
+
+@media (min-width:60em) {
+  p {
+    font-size:8em;
+  }
+}
